@@ -1,0 +1,121 @@
+# Max Stack Material Corruption
+# Credit to Zerolfo for creating this method
+# Credit to ZXRobin for the discovery of Inventory Slot Transfer
+
+# BEGIN SETUP
+
+# Setting up an example inventory for the glitch;
+# This example corrupts Diamonds, Sapphires, and Fairies.
+
+# Key Items
+get 1 SheikahSlate 1 Paraglider 500 KorokSeed 500 SpiritOrb 1 MiphasGracePlus 1 RevalisGalePlus 1 UrbosasFuryPlus 1 DaruksProtectionPlus 1 TravelMedallion
+
+# Meals
+get 3 MeatSkewer
+
+# Materials
+get 2 Apple 3 HeartyDurian 1 Sapphire 1 Fairy 1 Diamond
+
+# Armor
+get 1 HylianTrousers[star=4] 1 ChampionsTunic[star=4] 1 MajorasMask
+
+# Shields
+get 1 HylianShield[modifier=durability] 1 AncientShield
+
+# Bows
+get 1 BowOfLight 4 SavageLynelBow
+
+# Weapons
+get 1 MasterSword 1 GreatFlameblade 1 GreatThunderblade 1 GreatFrostblade
+
+save
+
+# END SETUP
+
+# Start a new game
+new-game
+
+# Obtain the Sheikah Slate and exit the Shrine of Resurrection
+get 1 Slate
+
+# Obtain 2 branches and a Hylian Shroom.
+get 2 TreeBranch 1 HylianShroom
+
+# Eat the Hylian Shroom
+eat 1 HylianShroom
+
+# Obtain a Woodcutter's Axe and equip it
+get 1 WoodcuttersAxe
+equip WoodcuttersAxe
+
+# Obtain a Pot Lid and a Traveler's Bow
+get 1 PotLid 1 TravelersBow
+
+# An autosave will occur upon opening the chest containing the Traveler's Bow
+# Call this Autosave 1
+save-as Autosave1
+
+# Load the progressed save
+reload
+
+# Break (offset) the number of slots equal to the amount of non-empty Key Item slots plus the number of unique items you are corrupting (only up to 3 at a time)
+!break 12 slots
+
+# Sell or consume all meals
+eat all food
+
+# Load Autosave 1
+reload Autosave1
+
+# Open the menu to see the transferred Key Items and the materials to corrupt
+pause
+
+# Close and reopen the menu twice
+unpause
+pause
+unpause
+pause
+
+# Close the menu
+unpause
+
+# Generate an autosave
+# Call this Autosave 2
+save-as Autosave2
+
+# Unequip the Woodcutter's Axe and drop all materials, the Pot Lid, and the Traveler's Bow
+unequip WoodcuttersAxe
+drop all materials 1 PotLid 1 TravelersBow
+
+# Load Autosave 2
+reload Autosave2
+
+# Generate an autosave without modifying your inventory or using any menu
+# Call this Autosave 3
+save-as Autosave3
+
+# Drop all materials, the Pot Lid, the Traveler's Bow, and all weapons.
+drop all materials 1 PotLid 1 TravelersBow all weapons
+
+# Load Autosave 3
+reload Autosave3
+
+# The materials will be corrupted to max stack
+# If desired, load the progressed save to transfer the corrupted items to it
+reload
+
+# Open the menu to see the transferred and corrupted stacks of materials
+pause
+
+# Close and reopen the menu twice
+unpause
+pause
+unpause
+pause
+
+# Save the game
+save
+
+# Close and reopen the game from the Home Menu
+close-game
+reload
