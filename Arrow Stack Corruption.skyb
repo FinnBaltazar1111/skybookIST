@@ -1,0 +1,57 @@
+# Direct Inventory Corruption (Arrow Stack Corruption)
+# General steps and inventory from CM30 at Gaming Reinvented, credit to them for the method
+# Credit to ZXRobin for the discovery of Inventory Slot Transfer
+# Credit to anyone I forgot to put here (sorry!)
+
+# BEGIN SETUP
+
+# Slot counts
+:slots [weapon=13,bow=10]
+
+# Key Items
+get 1 RevalisGalePlus 1 DaruksProtectionPlus 1 UrbosasFuryPlus 1 MiphasGracePlus 1 PictureOfTheChampions 1 SheikahSlate 1 Paraglider 1 TravelMedallion 1 AncientBridle 1 HestusMaracas 1 AncientSaddle
+
+# Armor
+get 1 HylianHood 1 SnowquillTunic 1 SnowquillTrousers
+
+# Shields
+get 4 HylianShield
+
+# Bows and Arrows
+get 2 BowOfLight[modifier=attack] 2 GreatEagleBow[modifier=attack] 1 SavageLynelBow[modifier=addpowerplus] 1 SavageLynelBow[modifier=durability,modifier=plus] 1 SavageLynelBow 1 SavageLynelBow[modifier=durability,modifier=plus] 1 SavageLynelBow[modifier=addpowerplus] 1 BowOfLight[modifier=attack,durability=205];equip BowOfLight[slot=3]
+get 85 Arrow 24 FireArrow 70 IceArrow 121 ShockArrow 19 BombArrow 8 AncientArrow
+
+# Weapons
+get 1 SavageLynelSword[modifier=durability] 1 MasterSword 1 SavageLynelCrusher[modifier=attackup] 1 RoyalGuardsClaymore 1 GreatThunderblade[modifier=durability,modifier=plus] 1 ScimitarOfTheSeven 1 GreatFrostblade;equip MasterSword;unpause;
+
+# Make a manual save
+save
+
+# END SETUP
+
+# Break (offset) the number of IST slots equal to the number of Key Items plus the index of the arrow type to corrupt
+# (Normal arrows = 1, Ancient arrows = 6)
+# (this example corrupts Ancient arrows)
+!break 17 slots
+
+# Start the "Stranded on Eventide" quest or the Trial of the Sword
+!trial-start
+
+# Obtain the number of weapons equal to the index of the arrow type to corrupt
+get 2 TreeBranch 4 BokoSpear
+
+# Load manual save
+reload
+
+# Generate an autosave without modifying the inventory or using a menu
+save-as Autosave
+
+# Load the autosave
+reload Autosave
+
+# Make a manual save
+save
+
+# Close and reopen the game from the Home Menu
+close-game
+reload
